@@ -5,7 +5,7 @@ import CardImg from "../../assets/img/catalog/blueberry.png";
 import ButtonPlus from "../UI/Buttons/ButtonPlus";
 import ButtonCounter from "../UI/Buttons/ButtonCounter";
 
-function Card({ className = "", newTaste, title, subtitle, price }) {
+function Card({ className = "", newTaste, title, subtitle, price, cardSrc }) {
 	const classses = classNames("card", className);
 
 	const [isFirst, setIsFirst] = useState(true);
@@ -54,7 +54,7 @@ function Card({ className = "", newTaste, title, subtitle, price }) {
 		<div className={classses}>
 			<div className="card__content">
 				<div className="card__left">
-					<img src={CardImg} alt="blueberry" className="card__img" />
+					<img src={cardSrc} alt="blueberry" className="card__img" />
 
 					<div className="card__left-bottom">
 						<h4 className="card__title">{title}</h4>
