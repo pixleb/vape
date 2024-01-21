@@ -1,0 +1,71 @@
+@import "variables";
+@import "fonts";
+@import "libs/normalize";
+
+@import "components/all";
+
+body {
+	background-color: #fff;
+	font-family: "Roboto";
+	color: #111827;
+}
+
+.title {
+	color: #111827;
+
+	font-size: 22px;
+	font-weight: 600;
+	line-height: 28px;
+	margin-bottom: 30px;
+
+	@media (max-width: $md1) {
+		margin-bottom: 10px;
+	}
+
+	span {
+		color: #6b7280;
+		font-size: 22px;
+		font-weight: 500;
+		line-height: 28px;
+
+		margin-left: 20px;
+	}
+}
+
+.all-goods {
+	color: #6b7280;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+
+	span {
+		color: #6b7280;
+	}
+
+	&._mob {
+		display: none;
+
+		@media (max-width: $md1) {
+			display: block;
+		}
+	}
+
+	@media (max-width: $md1) {
+		margin-bottom: 20px;
+	}
+}
+
+.container {
+	max-width: $container-width;
+	padding: 0px 15px;
+	margin: 0 auto;
+}
+
+#root {
+	padding-bottom: 50px;
+	scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+	width: 0; /* Для Chrome, Safari и Opera */
+}
