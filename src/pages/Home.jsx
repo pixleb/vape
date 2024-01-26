@@ -5,6 +5,7 @@ import Glicerin12Extra from "./Catalog/Glicerin12Extra";
 import Glicerin18 from "./Catalog/Glicerin18";
 import Nikobuster from "./Catalog/Nikobuster";
 import Others from "./Catalog/Others";
+import Search from "./Catalog/Search";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
 
@@ -24,6 +25,15 @@ function Home({ catalogItems, activePage, setActivePage }) {
 		<div className="container">
 			<div className="home">
 				<nav className="nav">
+				    {
+                        activePage.includes(':')?
+                        (
+                            <Search input = { activePage.split(':')[1] } />
+                        ) : (
+                            ""
+                        )
+                    }
+				
 					{activePage === "home" ? (
 						<div className="nav__wrapper">
 							<ul className="nav__content">
@@ -31,7 +41,7 @@ function Home({ catalogItems, activePage, setActivePage }) {
 								<li className="nav__item">{catalogItems[pageIndex]}</li>
 							</ul>
 							<div className="all-goods">
-								<span>12</span> товарів
+								<span></span>
 							</div>
 						</div>
 					) : (
@@ -44,7 +54,7 @@ function Home({ catalogItems, activePage, setActivePage }) {
 								<li className="nav__item">Корзина</li>
 							</ul>
 							<div className="all-goods">
-								<span>12</span> товарів
+								<span></span>
 							</div>
 						</div>
 					) : (

@@ -1,13 +1,26 @@
 import classNames from "classnames";
-import React from "react";
+import React, { createRef } from "react";
 
-export default function SearchBar({ className }) {
+export default function SearchBar({ className, setActivePage }) {
 	const classes = classNames("search-bar", className);
+    
+    let textInput = createRef();
+    
+    const handleSubmit = e => {
+        e.preventDefault();
+        
+        console.log('submitted');
+        
+        let val = textInput.current.value;
+        setActivePage(`:${val}`);
+    }
 
 	return (
 		<div className={classes}>
 			<div className="search-bar__content">
+			    <form onSubmit={ handleSubmit }>
 				<input
+				    ref = {textInput}
 					type="text"
 					className="search-bar__input"
 					placeholder="Шукати товари"
@@ -28,6 +41,7 @@ export default function SearchBar({ className }) {
 						/>
 					</svg>
 				</div>
+				</form>
 			</div>
 		</div>
 	);

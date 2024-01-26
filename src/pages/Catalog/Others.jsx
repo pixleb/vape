@@ -1,6 +1,33 @@
 import Card from "../../components/Card/Card";
 
+function getOther()
+{
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', '/get_other', false);
+    xhr.send(null);
+    //console.log(xhr.responseText, typeof xhr.responseText)
+    return JSON.parse(xhr.responseText);
+    
+}
+
 function Others() {
+    let res = getOther();
+    let quantity = res.size, prod = res.products;
+    console.log(prod)
+    
+    let cards = new Array();
+    prod.forEach(product => {
+        let new_card = <Card 
+            className = 'taste__card'
+            title = {product.name}
+            subtitle = {product.description}
+            price = {product.price}
+            cardSrc = {product.imageURLMiniature}
+            item = {product}
+        />
+        cards.push(new_card);
+    });
+    
 	return (
 		<>
 			<h1 className="title">Iнше</h1>
@@ -11,12 +38,9 @@ function Others() {
 			<section className="taste">
 				<div className="taste__content">
 					<div className="taste__body">
-						<Card
-							className="taste__card"
-							title="БРЕЛОК-ВІДКРИВАЧКА"
-							subtitle=""
-							price={20}
-						/>
+						
+                        { cards }
+                        
 					</div>
 				</div>
 			</section>

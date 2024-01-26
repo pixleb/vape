@@ -5,7 +5,7 @@ function getGlicerin12()
     let xhr = new XMLHttpRequest;
     xhr.open('GET', '/get_glicerin_12', false);
     xhr.send(null);
-    console.log(xhr.responseText, typeof xhr.responseText)
+    //console.log(xhr.responseText, typeof xhr.responseText)
     return JSON.parse(xhr.responseText);
     
 }
@@ -23,11 +23,10 @@ function Glicerin12Extra() {
             subtitle = {product.description}
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
+            item = {product}
         />
-        console.log(new_card);
         cards.push(new_card);
     });
-    console.log(cards);
     
 	return (
 		<>

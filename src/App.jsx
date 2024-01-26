@@ -2,9 +2,12 @@ import { Header } from "./components";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 function App() {
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
+    
 	const catalog = [
 		"Премикс 18 мл",
 		"Премикс 12 мл",

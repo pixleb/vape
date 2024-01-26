@@ -5,8 +5,13 @@ import CardImg from "../../assets/img/catalog/blueberry.png";
 import ButtonPlus from "../UI/Buttons/ButtonPlus";
 import ButtonCounter from "../UI/Buttons/ButtonCounter";
 
-function Card({ className = "", newTaste, title, subtitle, price, cardSrc }) {
-	const classses = classNames("card", className);
+import cart from "../../cart/cart.js";
+
+function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item }) {
+    //debug
+    console.log('item passed into card: ', item);
+    
+	const classes = classNames("card", className);
 
 	const [isFirst, setIsFirst] = useState(true);
 	const [quantityCounter, setQuantityCounter] = useState(0);
@@ -31,12 +36,14 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc }) {
 
 	const addItem = (first = true) => {
 		if (first && isFirst) {
-			// if this is the first click - show couter
+			// if this is the first click - show counter
 			setIsFirst(false);
 			setQuantityCounter(1);
 		} else {
 			// smth else
 		}
+        // explicit
+        cart.add(item);
 	};
 	const removeItem = (first = true) => {
 		if (quantityCounter === 0) {
@@ -48,10 +55,12 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc }) {
 		} else {
 			// smth else
 		}
+        // explicit
+        cart.rem(item);
 	};
 
 	return (
-		<div className={classses}>
+		<div className={classes}>
 			<div className="card__content">
 				<div className="card__left">
 					<img src={cardSrc} alt="blueberry" className="card__img" />
@@ -66,9 +75,10 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc }) {
 					<div className="card__price">
 						<span>{price}</span> грн
 					</div>
+					{ quantityCounter ?
 					<div className="card__totalprice">
-						<span>1230</span> грн
-					</div>
+						<span> {quantityCounter * price} </span> грн
+					</div> :  "" }
 				</div>
 				<div className="card__right">
 					{isFirst ? (

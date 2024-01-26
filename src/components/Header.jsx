@@ -11,7 +11,7 @@ function Header({ catalog, activePage, setActivePage }) {
 				<div className="header__content container">
 					<img
 						src={Logo}
-						alt="Flully Pull"
+						alt="Fluffy Puff"
 						className="header__logo"
 						onClick={() => setActivePage("home")}
 					/>
@@ -20,7 +20,7 @@ function Header({ catalog, activePage, setActivePage }) {
 						activePage={activePage}
 						setActivePage={setActivePage}
 					/>
-					<SearchBar />
+					<SearchBar setActivePage = {setActivePage} />
 					<div className="header__cart" onClick={() => setActivePage("cart")}>
 						<div className="header__cart-content">
 							<svg
@@ -41,7 +41,7 @@ function Header({ catalog, activePage, setActivePage }) {
 							<div className="header__cart-body">
 								<span>Кошик</span>
 								<div>
-									<span>0</span> товарів
+									<span></span>
 								</div>
 							</div>
 						</div>
@@ -60,7 +60,7 @@ function Header({ catalog, activePage, setActivePage }) {
 
 						<img
 							src={Logo}
-							alt="Flully Pull"
+							alt="Fluffy Puff"
 							className="header__logo"
 							onClick={() => setActivePage("home")}
 						/>
@@ -84,7 +84,7 @@ function Header({ catalog, activePage, setActivePage }) {
 								<div className="header__cart-body">
 									<span>Кошик</span>
 									<div>
-										<span>0</span> товарів
+										<span></span>
 									</div>
 								</div>
 							</div>
