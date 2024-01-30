@@ -4,9 +4,7 @@ import React, { useState } from "react";
 import CardImg from "../../assets/img/catalog/blueberry.png";
 import ButtonCounter from "../UI/Buttons/ButtonCounter";
 
-import cart from '../../cart/cart.js';
-
-function CardCart({ className = "", newTaste, title, subtitle, price, cardSrc, item, parentUpdate }) {
+function CardCart({ className = "", newTaste, title, subtitle, price, cardSrc, item, parentUpdate, cart }) {
 	const classes = classNames("card", className);
 
 	const [quantityCounter, setQuantityCounter] = useState(item.quantity);

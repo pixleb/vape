@@ -2,13 +2,11 @@ import React from "react";
 import CardCart from "../components/Card/CardCart";
 import ButtonCheckout from "../components/UI/Buttons/ButtonCheckout";
 
-import cart from '../cart/cart.js';
-
-function Cart({ setActivePage }) {
+function Cart({ setActivePage, cart }) {
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
     
-    console.log('cart displayed: ', cart);
+    //console.log('cart displayed: ', cart);
     let prod = Object.values(cart.stored);
     
     // подсчитывает количество и стоимость товаров в корзине 
@@ -30,6 +28,7 @@ function Cart({ setActivePage }) {
             cardSrc = {product.imageURLMiniature}
             item = {product}
             parentUpdate = {forceUpdate}
+            cart = {cart}
         />
         cards.push(new_card);
     });

@@ -9,14 +9,14 @@ import Search from "./Catalog/Search";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
 
-function Home({ catalogItems, activePage, setActivePage }) {
+function Home({ catalogItems, activePage, setActivePage, cart }) {
 	// Router
 	const pagesComponent = [
-		<Glicerin18 />,
-		<Glicerin12Extra />,
-		<Glicerin />,
-		<Nikobuster />,
-		<Others />,
+		<Glicerin18 cart = {cart} />,
+		<Glicerin12Extra cart = {cart} />,
+		<Glicerin cart = {cart} />,
+		<Nikobuster cart = {cart} />,
+		<Others cart = {cart} />,
 	];
 
 	const pageIndex = useSelector(({ catalog }) => catalog.catalogIndex);
@@ -51,7 +51,7 @@ function Home({ catalogItems, activePage, setActivePage }) {
 						<div className="nav__wrapper">
 							<ul className="nav__content">
 								<li className="nav__item _main">Выбор товаров</li>
-								<li className="nav__item">Корзина</li>
+								<li className="nav__item">Кошик</li>
 							</ul>
 							<div className="all-goods">
 								<span></span>
@@ -64,7 +64,8 @@ function Home({ catalogItems, activePage, setActivePage }) {
 					{activePage === "checkout" ? (
 						<ul className="nav__content">
 							<li className="nav__item _main">Выбор товаров</li>
-							<li className="nav__item">Кошик</li>
+							<li className="nav__item" onClick = { () => setActivePage('cart') }
+							    style = {{'cursor': 'pointer'}}>Кошик</li>
 							<li className="nav__item">Оформлення товарів</li>
 						</ul>
 					) : (
@@ -75,11 +76,11 @@ function Home({ catalogItems, activePage, setActivePage }) {
 
 			{activePage === "home" ? pagesComponent[pageIndex] : ""}
 			{activePage === "cart" ? (
-				<Cart activePage={activePage} setActivePage={setActivePage} />
+				<Cart cart = {cart} activePage={activePage} setActivePage={setActivePage} />
 			) : (
 				""
 			)}
-			{activePage === "checkout" ? <Checkout /> : ""}
+			{activePage === "checkout" ? <Checkout cart = {cart} activePage={activePage} setActivePage={setActivePage} /> : ""}
 		</div>
 	);
 }

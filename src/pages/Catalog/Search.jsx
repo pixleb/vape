@@ -9,7 +9,7 @@ function getSearchResults(input)
     return JSON.parse(xhr.responseText);
 }
 
-function Search({ input }) {
+function Search({ input, cart }) {
     let res = getSearchResults(input);
     let quantity = res.size, prod = res.products;
     console.log(res, prod)
@@ -23,6 +23,7 @@ function Search({ input }) {
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
             item = {product}
+            cart = {cart}
         />
         cards.push(new_card);
     });

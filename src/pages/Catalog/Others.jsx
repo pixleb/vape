@@ -10,7 +10,7 @@ function getOther()
     
 }
 
-function Others() {
+function Others({ cart }) {
     let res = getOther();
     let quantity = res.size, prod = res.products;
     console.log(prod)
@@ -24,6 +24,7 @@ function Others() {
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
             item = {product}
+            cart = {cart}
         />
         cards.push(new_card);
     });

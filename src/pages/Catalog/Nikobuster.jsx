@@ -10,7 +10,7 @@ function getNicobooster()
     
 }
 
-function Nikobuster() {
+function Nikobuster({ cart }) {
     let res = getNicobooster();
     let quantity = res.size, prod = res.products;
     console.log(prod)
@@ -24,6 +24,7 @@ function Nikobuster() {
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
             item = {product}
+            cart = {cart}
         />
         cards.push(new_card);
     });

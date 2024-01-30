@@ -11,7 +11,7 @@ function getGlycerine()
 }
 
 
-function Glicerin() {
+function Glicerin({ cart }) {
     let res = getGlycerine();
     let quantity = res.size, prod = res.products;
     console.log(prod)
@@ -25,6 +25,7 @@ function Glicerin() {
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
             item = {product}
+            cart = {cart}
         />
         cards.push(new_card);
     });

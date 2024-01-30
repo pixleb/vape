@@ -5,11 +5,9 @@ import CardImg from "../../assets/img/catalog/blueberry.png";
 import ButtonPlus from "../UI/Buttons/ButtonPlus";
 import ButtonCounter from "../UI/Buttons/ButtonCounter";
 
-import cart from "../../cart/cart.js";
-
-function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item }) {
+function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item, cart }) {
     //debug
-    console.log('item passed into card: ', item);
+    //console.log('item passed into card: ', item);
     
 	const classes = classNames("card", className);
 

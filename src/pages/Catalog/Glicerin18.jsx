@@ -1,5 +1,6 @@
 import Card from "../../components/Card/Card";
 import axios from 'axios';
+import React from "react";
 
 function getGlicerin18()
 {
@@ -11,17 +12,26 @@ function getGlicerin18()
     
 }
 
-function Glicerin18() {
-    let res = getGlicerin18();
-    let quantity = res.size, prod = res.products;
-    console.log(prod)
+function Glicerin18({ cart }) {
+    //let res = getGlicerin18();
+    const [loadedData, setLoadedData] = React.useState({products: [], size: 0});
+    
+    React.useEffect(() => {
+        axios.get('/get_glicerin_18')
+        .then(res => {
+            setLoadedData(res.data);
+        });
+    });
+    
+    let quantity = loadedData.size, prod = loadedData.products;
     
     let cards = new Array();
+    
     let lastCategory = new String();
     prod.forEach(product => {
         if(product.category !== lastCategory)
         {
-            let title;
+            let title = '';
             
             if (product.categoryId === '4947ed06-b209-11ee-0a80-066b001dc47d')
                 title = <h2 className="taste__title _rose">SWEETS & DESSERTS</h2>;
@@ -40,6 +50,7 @@ function Glicerin18() {
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
             item = {product}
+            cart = {cart}
         />
         cards.push(new_card);
         lastCategory = product.category;

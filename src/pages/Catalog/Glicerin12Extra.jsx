@@ -10,7 +10,7 @@ function getGlicerin12()
     
 }
 
-function Glicerin12Extra() {
+function Glicerin12Extra({ cart }) {
     let res = getGlicerin12();
     let quantity = res.size, prod = res.products;
     console.log(prod)
@@ -24,6 +24,7 @@ function Glicerin12Extra() {
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
             item = {product}
+            cart = {cart}
         />
         cards.push(new_card);
     });

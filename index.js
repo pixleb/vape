@@ -2,27 +2,31 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
+const path = require('path');
 
 let app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static('./build'));
+app.use(express.static(path.join(__dirname, 'build/')));
 
 app.get('/', function(req, res)
 {
-    res.sendFile('./build/index.html');
+    res.sendFile(path.join(__dirname, 'build/index.html'));
 });
 
 app.get('/search', function(req, res) 
 {
+    //console.log('got search request');
+    
     let input = req.query.input;
     
     axios.get(`https://b2b.moysklad.ru/desktop-api/public/kZPpwgM9Powo/products.json?category=&category_id=&limit=1000&offset=0&search=${input}`)
     .then(
         resp => 
         {   
+            //console.log('search request response: {\n', resp.data.products[0], '\n...');
             return res.json(resp.data);
         }
     )
@@ -30,6 +34,8 @@ app.get('/search', function(req, res)
 
 app.get('/get_glicerin_18', function(req, res)
 {
+    //console.log('got glicerin 18 request');
+    
     let prod = {products: [], size: 0};
     let categories = [
         '513ab57e-b209-11ee-0a80-032d001d7495',
@@ -49,6 +55,7 @@ app.get('/get_glicerin_18', function(req, res)
                     prod.products.push(product);
             })
             prod.size = prod.products.length;
+            //console.log('glicerin 18 response: {\n', prod.products[0], '\n...');
             
             return res.json(prod);
         }
@@ -58,6 +65,8 @@ app.get('/get_glicerin_18', function(req, res)
 
 app.get('/get_glicerin_12', function(req, res)
 {
+    //console.log('got glicerin 12 request');
+    
     let prod = {products: [], size: 0};
     let categories = [
         '41e7dc97-2d65-11ee-0a80-0c8f000c18e2',
@@ -74,6 +83,7 @@ app.get('/get_glicerin_12', function(req, res)
                 if (categories.includes(product.categoryId)) prod.products.push(product);
             })
             prod.size = prod.products.length;
+            //console.log('glicerin 12 response: {\n', prod.products[0], '\n...');
             //console.log(prod);
             return res.json(prod);
         }
@@ -83,10 +93,13 @@ app.get('/get_glicerin_12', function(req, res)
 
 app.get('/get_other', function(req, res)
 {
+    //console.log('got other request');
+    
     axios.get('https://b2b.moysklad.ru/desktop-api/public/kZPpwgM9Powo/products.json?category=&category_id=54a1e6db-2d5a-11ee-0a80-0d500012bca3&limit=1000&offset=0&search=')
     .then(
         resp => 
         {
+            //console.log('other response: {\n', prod.products[0], '\n...');
             return res.json(resp.data);
         }
     )
@@ -95,10 +108,13 @@ app.get('/get_other', function(req, res)
 
 app.get('/get_nicobooster', function(req, res)
 {
+    //console.log('got nicobooster request');
+    
     axios.get('https://b2b.moysklad.ru/desktop-api/public/kZPpwgM9Powo/products.json?category=&category_id=4a94da25-2d5a-11ee-0a80-09140012defa&limit=1000&offset=0&search=')
     .then(
         resp => 
         {
+            //console.log('nicobooster response: {\n', prod.products[0], '\n...');
             return res.json(resp.data);
         }
     )
@@ -107,10 +123,13 @@ app.get('/get_nicobooster', function(req, res)
 
 app.get('/get_glycerine', function(req, res)
 {
+    //console.log('got glycerine request');
+    
     axios.get('https://b2b.moysklad.ru/desktop-api/public/kZPpwgM9Powo/products.json?category=&category_id=450502d2-2d5a-11ee-0a80-00790012aadd&limit=1000&offset=0&search=')
     .then(
         resp => 
         {
+            //console.log('glycerine response: {\n', prod.products[0], '\n...');
             return res.json(resp.data);
         }
     )
@@ -136,5 +155,5 @@ app.post('/order', function(req, res)
 
 app.listen(3005, function()
 {
-    console.log('server started');
+    console.log('server started on localhost:3005');
 })

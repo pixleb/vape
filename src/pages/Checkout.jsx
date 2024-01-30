@@ -2,9 +2,9 @@ import React from "react";
 import ImgSrc from "../assets/img/catalog/blueberry.png";
 import ButtonCheckout from "../components/UI/Buttons/ButtonCheckout";
 
-import cart from "../cart/cart.js";
-
-function Checkout() {
+function Checkout({ setActivePage, cart }) {
+    console.log('checkout set as active')
+    
     let prod = Object.values(cart.stored);
     
     // подсчитывает количество и стоимость товаров в корзине 
@@ -47,6 +47,9 @@ function Checkout() {
         xmlhttp.open("POST", '/order');
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.send(data);
+        
+        cart.clear();        
+        setActivePage("cart");
     }
     
 	return (
