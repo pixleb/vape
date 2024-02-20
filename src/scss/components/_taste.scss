@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
+    margin-top: 30px;
 
     @media (max-width: $md1) {
         gap: 20px;
@@ -15,7 +16,7 @@
     // .taste__title
     &__title {
         width: 100%;
-        padding: 20px 10px;
+        padding: 20px 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -29,20 +30,46 @@
         border-radius: 8px;
         background: #fff7ed;
 
+        @media (max-width: $md1) {
+            justify-content: space-between;
+        }
+
+        svg {
+            /*display: none;
+
+            @media (max-width: $md1) {
+                display: block;
+            }*/
+            transform: rotate(180deg);
+        }
+
+        &._active {
+            svg {
+                transform: rotate(0deg);
+            }
+        }
+
         // ._rose
         &._rose {
             background: #fdf2f8;
-            color: #f472b6;
+            span {
+                color: #f472b6;
+            }
         }
         // ._orange
         &._orange {
             background: #fff7ed;
-            color: #fb923c;
+            span {
+                color: #fb923c;
+            }
         }
         // ._blue
         &._blue {
             background: #f0f9ff;
-            color: #38bdf8;
+
+            span {
+                color: #38bdf8;
+            }
         }
     }
     // .taste__body

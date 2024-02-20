@@ -1,0 +1,35 @@
+.subcategory-catalog {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    
+    // .subcategory-catalog__content
+    &__content {
+        display: inline-flex;
+        border-radius: 6px;
+        @media (max-width: $md1) {
+            overflow-x: scroll;
+            display: flex;
+        }
+    }
+    // .subcategory-catalog__item
+    &__item {
+        padding: 13px 18px;
+        color: #6b7280;
+        cursor: pointer;
+        display: block;
+        background-color: #f9fafb;
+
+        white-space: nowrap;
+
+        transition: 0.25s ease-in-out all;
+
+        // ._active
+        &._active {
+            cursor: auto;
+            color: #1f2937;
+            font-size: 17px;
+            font-weight: 500;
+        }
+    }
+}

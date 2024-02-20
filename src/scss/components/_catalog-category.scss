@@ -1,0 +1,106 @@
+.catalog-category {
+    // .catalog-category__content
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @media (max-width: $md1) {
+            display: none;
+        }
+
+        &._mob {
+            display: none;
+            @media (max-width: $md1) {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+        }
+    }
+    // .catalog-category__top
+    &__top {
+        display: flex;
+        gap: 20px;
+    }
+    // .catalog-category__top-item
+    &__top-item {
+    }
+    // .catalog-category__item
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        flex: 0 1 100%;
+        padding: 30px;
+        border-radius: 30px;
+        cursor: pointer;
+
+        transition: 0.25s ease-in-out all;
+
+        @media (any-hover: hover) {
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: $md1) {
+            flex: none;
+            width: 45%;
+            flex-direction: column;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        &._1 {
+            background-color: #f0f9ff;
+        }
+
+        &._2 {
+            background-color: #fdf2f8;
+        }
+
+        &._3 {
+            background-color: #fdf2f8;
+        }
+
+        &._4 {
+            background-color: #eef2ff;
+        }
+
+        &._5 {
+            background-color: #fff7ed;
+        }
+    }
+    // .catalog-category__item-left
+    &__item-left {
+    }
+    // .catalog-category__title
+    &__title {
+        margin-bottom: 20px;
+
+        @media (max-width: $md1) {
+            margin-bottom: 4px;
+            font-size: 17px;
+        }
+    }
+    // .catalog-category__subtitle
+    &__subtitle {
+        @media (max-width: $md1) {
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+    }
+    // .catalog-category__item-img
+    &__item-img {
+    }
+    // .catalog-category__bottom
+    &__bottom {
+        display: flex;
+        gap: 20px;
+    }
+    // .catalog-category__bottom-item
+    &__bottom-item {
+    }
+}

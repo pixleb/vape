@@ -97,6 +97,23 @@
         font-weight: 400;
         line-height: 18px; /* 128.571% */
     }
+    &__images-container {
+        position: relative;
+    }
+    &__images-count {
+        position: absolute;
+        right: 3px;
+        top: 3px;
+        border-radius: 50%;
+        background-color: #1f2937;
+        color: #fff;
+        font-size: 9px;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     // .checkout__images
     &__images {
         display: flex;

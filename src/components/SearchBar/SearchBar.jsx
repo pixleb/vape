@@ -9,8 +9,6 @@ export default function SearchBar({ className, setActivePage }) {
     const handleSubmit = e => {
         e.preventDefault();
         
-        console.log('submitted');
-        
         let val = textInput.current.value;
         setActivePage(`:${val}`);
     }

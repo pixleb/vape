@@ -1,7 +1,6 @@
 .header {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #111827;
 	min-height: 128px;
-	margin-bottom: 20px;
 
 	&._mob {
 		display: none;
@@ -25,6 +24,7 @@
 		align-items: center;
 		gap: 15px;
 		padding: 20px 0px;
+        margin-top: 0 !important;
 		height: 128px;
 
 		@media (max-width: 991.98px) {

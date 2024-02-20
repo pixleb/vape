@@ -75,14 +75,23 @@ function Catalog({ items, setActivePage, activePage, className }) {
 					className={isOpen ? "catalog__body" : "catalog__body _hide"}
 				>
 					<ul className="catalog__list">
+					    <li
+				            className = "catalog__item"
+				            onClick={() => setActivePage("catalog")}
+				        >
+				            <a href="#" className="catalog__link">
+				                Все товары
+				            </a>
+				        </li>
 						{items.map((item, index) => {
 							return (
 								<li
-									className={
+									comment={ "" /*className={
 										activeType === index
 											? "catalog__item _active"
 											: "catalog__item"
-									}
+									}*/}
+									className = "catalog__item"
 									onClick={() => handleClick(index)}
 									key={item}
 								>

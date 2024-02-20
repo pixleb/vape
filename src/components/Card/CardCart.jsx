@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import CardImg from "../../assets/img/catalog/blueberry.png";
 import ButtonCounter from "../UI/Buttons/ButtonCounter";
 
-function CardCart({ className = "", newTaste, title, subtitle, price, cardSrc, item, parentUpdate, cart }) {
+function CardCart({ className = "", newTaste, title, subtitle, price, cardSrc, item, forceUpdate, cart }) {
 	const classes = classNames("card", className);
 
 	const [quantityCounter, setQuantityCounter] = useState(item.quantity);
@@ -13,7 +13,7 @@ function CardCart({ className = "", newTaste, title, subtitle, price, cardSrc, i
 		setQuantityCounter(quantityCounter + 1);
         // explicit
         cart.add(item);
-        parentUpdate();
+        forceUpdate();
 	};
 
 	const handleDecrement = () => {
@@ -21,13 +21,23 @@ function CardCart({ className = "", newTaste, title, subtitle, price, cardSrc, i
 			setQuantityCounter(quantityCounter - 1);
             // explicit
             cart.rem(item);
-            parentUpdate();
+            forceUpdate();
 		}
 	};
     
     const handleRemove = () => {
         cart.remAll(item);
-        parentUpdate();
+        forceUpdate();
+    }
+    
+    const handleInput = quantity => {
+        setQuantityCounter(quantity);
+        forceUpdate();
+    }
+    
+    const handleInputBlur = quantity => {
+        cart.set(item, quantity);
+        handleInput(quantity);
     }
 
 	return (
@@ -47,6 +57,10 @@ function CardCart({ className = "", newTaste, title, subtitle, price, cardSrc, i
 						quantity={quantityCounter}
 						onClickMinusBtn={handleDecrement}
 						onClickPlusBtn={handleIncrement}
+						quantityHandler={handleInput}
+						inputBlurHandler={handleInputBlur}
+						minlimit={1}
+						maxlimit={item.stock}
 						size="md"
 					/>
 				</div>

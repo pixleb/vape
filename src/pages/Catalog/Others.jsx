@@ -1,22 +1,26 @@
 import Card from "../../components/Card/Card";
+import axios from 'axios';
+import React from "react";
 
-function getOther()
-{
-    let xhr = new XMLHttpRequest;
-    xhr.open('GET', '/get_other', false);
-    xhr.send(null);
-    //console.log(xhr.responseText, typeof xhr.responseText)
-    return JSON.parse(xhr.responseText);
+function Others({ cart, forceUpdate }) {
+    const [loadedData, setLoadedData] = React.useState({products: [], size: 0});
     
-}
-
-function Others({ cart }) {
-    let res = getOther();
-    let quantity = res.size, prod = res.products;
-    console.log(prod)
+    React.useEffect(() => {
+        // deprecates requests, if data up to date already
+        if (loadedData.size) return;
+        axios.get('/get_other')
+        .then(res => setLoadedData(res.data));
+    });
+    
+    let quantity = loadedData.size, prod = loadedData.products;
     
     let cards = new Array();
     prod.forEach(product => {
+        
+        let quantity = 0;
+        if (Object.keys(cart.stored).includes(product.code))
+            quantity = cart.stored[product.code].quantity;
+        
         let new_card = <Card 
             className = 'taste__card'
             title = {product.name}
@@ -25,6 +29,8 @@ function Others({ cart }) {
             cardSrc = {product.imageURLMiniature}
             item = {product}
             cart = {cart}
+            forceUpdate = {forceUpdate}
+            quantity={quantity}
         />
         cards.push(new_card);
     });
@@ -33,7 +39,7 @@ function Others({ cart }) {
 		<>
 			<h1 className="title">Iнше</h1>
 			<div className="all-goods _mob">
-				<span>12</span> товарів
+				<span>{quantity}</span> товарів
 			</div>
 
 			<section className="taste">

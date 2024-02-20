@@ -2,10 +2,7 @@ import React from "react";
 import CardCart from "../components/Card/CardCart";
 import ButtonCheckout from "../components/UI/Buttons/ButtonCheckout";
 
-function Cart({ setActivePage, cart }) {
-    const [, updateState] = React.useState();
-    const forceUpdate = React.useCallback(() => updateState({}), []);
-    
+function Cart({ setActivePage, cart, forceUpdate }) {
     //console.log('cart displayed: ', cart);
     let prod = Object.values(cart.stored);
     
@@ -27,7 +24,7 @@ function Cart({ setActivePage, cart }) {
             price = {product.price}
             cardSrc = {product.imageURLMiniature}
             item = {product}
-            parentUpdate = {forceUpdate}
+            forceUpdate = {forceUpdate}
             cart = {cart}
         />
         cards.push(new_card);
@@ -40,7 +37,8 @@ function Cart({ setActivePage, cart }) {
 				<div className="cart__items taste__body">
 					{ cards }
 				</div>
-				<div className="cart__right">
+				{ Object.keys(cart.stored).length ? (
+                <div className="cart__right">
 					<div className="cart__right-totalCount">
 						<span>{sumQuantity}</span> товарів
 					</div>
@@ -55,6 +53,8 @@ function Cart({ setActivePage, cart }) {
 						менеджера при підтверджені замовлення.
 					</p>
 				</div>
+                ) : "" }
+				
 			</div>
 		</div>
 	);

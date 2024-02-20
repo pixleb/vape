@@ -1,28 +1,30 @@
+import React from "react";
+
 import { Header } from "./components";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
-import React from "react";
 
 import CartComponent from './components/Cart/Cart';
 
 
-function App()
+function App({ cart })
 {
-    const [activePage, setActivePage] = React.useState('home');
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+    
+    const [activePage, setActivePage] = React.useState("catalog");
     
     const catalog = [
-        "Премикс 18 мл",
-        "Премикс 12 мл",
+        "Премiкс 18 мл",
+        "Премiкс 12 мл",
         "Глiцерин",
         "Нiкобустери",
         "Iнше",
     ];
         
-    let cartComponent = <CartComponent activePage={activePage} setActivePage={setActivePage} />
-    //let cart = this.cartRef.current;
-    let cart = null;  
-        
+    let cartComponent = <CartComponent activePage={activePage} setActivePage={setActivePage} cart = {cart} />
+
     return (
 		<>
 			<Header
@@ -36,6 +38,7 @@ function App()
 				activePage={activePage}
 				setActivePage={setActivePage}
 				cart = {cart}
+				forceUpdate = {forceUpdate}
 			/>
 		</>
     );    

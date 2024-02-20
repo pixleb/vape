@@ -1,18 +1,18 @@
 import Card from "../../components/Card/Card";
+import axios from 'axios';
+import React from "react";
 
-function getSearchResults(input)
-{
-    let xhr = new XMLHttpRequest;
-    xhr.open('GET', `/search?input=${input}`, false);
-    xhr.send(null);
-    //console.log(xhr.responseText, typeof xhr.responseText)
-    return JSON.parse(xhr.responseText);
-}
-
-function Search({ input, cart }) {
-    let res = getSearchResults(input);
-    let quantity = res.size, prod = res.products;
-    console.log(res, prod)
+function Search({ input, cart, forceUpdate }) {
+    const [loadedData, setLoadedData] = React.useState({products: [], size: 0});
+    
+    React.useEffect(() => {
+        // deprecates requests, if data up to date already
+        if (loadedData.size) return;
+        axios.get(`/search?input=${input}`)
+        .then(res => setLoadedData(res.data));
+    });
+    
+    let quantity = loadedData.size, prod = loadedData.products;
     
     let cards = new Array();
     prod.forEach(product => {
@@ -24,6 +24,7 @@ function Search({ input, cart }) {
             cardSrc = {product.imageURLMiniature}
             item = {product}
             cart = {cart}
+            forceUpdate = {forceUpdate}
         />
         cards.push(new_card);
     });

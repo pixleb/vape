@@ -5,19 +5,19 @@ import CardImg from "../../assets/img/catalog/blueberry.png";
 import ButtonPlus from "../UI/Buttons/ButtonPlus";
 import ButtonCounter from "../UI/Buttons/ButtonCounter";
 
-function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item, cart }) {
+function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item, cart, forceUpdate, quantity = 0 }) {
     //debug
     //console.log('item passed into card: ', item);
     
 	const classes = classNames("card", className);
 
-	const [isFirst, setIsFirst] = useState(true);
-	const [quantityCounter, setQuantityCounter] = useState(0);
+	const [isFirst, setIsFirst] = useState(!(Boolean(quantity)));
+	const [quantityCounter, setQuantityCounter] = useState(quantity);
 
 	const handleIncrement = () => {
 		addItem(false);
-
-		setQuantityCounter(quantityCounter + 1);
+        if (quantityCounter < item.stock)
+            setQuantityCounter(quantityCounter + 1);
 	};
 
 	const handleDecrement = () => {
@@ -31,6 +31,16 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item,
 			setIsFirst(true);
 		}
 	};
+    const handleInput = quantity => {
+        setQuantityCounter(quantity);
+        forceUpdate();
+    }
+    
+    const handleInputBlur = quantity => {
+        setIsFirst(!quantity);
+        cart.set(item, quantity);
+        handleInput(quantity);
+    }
 
 	const addItem = (first = true) => {
 		if (first && isFirst) {
@@ -42,6 +52,7 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item,
 		}
         // explicit
         cart.add(item);
+        forceUpdate();
 	};
 	const removeItem = (first = true) => {
 		if (quantityCounter === 0) {
@@ -55,6 +66,7 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item,
 		}
         // explicit
         cart.rem(item);
+        forceUpdate();
 	};
 
 	return (
@@ -86,6 +98,10 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item,
 							quantity={quantityCounter}
 							onClickMinusBtn={handleDecrement}
 							onClickPlusBtn={handleIncrement}
+							quantityHandler={handleInput}
+							inputBlurHandler={handleInputBlur}
+							minlimit={0}
+							maxlimit={item.stock}
 							size="md"
 						/>
 					)}

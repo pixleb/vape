@@ -10,11 +10,53 @@ function ButtonCounter({
 	onClickMinusBtn,
 	onClickPlusBtn,
 	quantity,
+    quantityHandler,
+    maxlimit,
+    minlimit,
+    inputBlurHandler,
 	...props
 }) {
 	const classes = classNames("counter counter-" + size, className);
+    
+    const [stockOverflow, setStockOverflow] = useState(false);
 
 	// Написать потом логику проброса стейта с родительского компонента сюда
+    
+    const handleInput = e => {
+        let currentValue = Number(e.target.value);
+        quantityHandler(currentValue);
+    }
+    
+    const handleBlur = e => {
+        let currentValue = Number(e.target.value);
+        if(currentValue < minlimit || currentValue > maxlimit)
+        {
+            setStockOverflow(true);
+            currentValue = (currentValue > maxlimit ? maxlimit : minlimit);
+        }
+        e.target.value = currentValue;
+        inputBlurHandler(currentValue);
+        console.log('set value on blur')
+    }
+    
+    /*const handleKey = e => {
+        let isKeyNumeric = !isNaN(Number(e.key));
+        if (isKeyNumeric)
+        {
+            let newValue = Number(e.target.value+e.key);
+            if(newValue < minlimit || newValue > maxlimit)
+            {
+                e.preventDefault();
+                console.log('prevented with newval: ', newValue)
+                setStockOverflow(true);
+                e.target.value = (newValue > maxlimit ? maxlimit : minlimit);
+            }
+        }
+        //else if (stockOverflow)
+            //setStockOverflow(false);
+    }*/
+    
+    let ctrRef = React.useRef();
 
 	return (
 		<div className={classes} onClick={onClickCounter}>
@@ -23,13 +65,31 @@ function ButtonCounter({
 					onClick={onClickMinusBtn}
 					className={size === "md" ? "button-minus-md" : "button-minus-sm"}
 				/>
-				<div className="counter__body">{quantity}</div>
+				<input ref={ctrRef} 
+				    type="number" 
+				    className="counter__body" 
+				    onChange={handleInput}
+				    onBlur={handleBlur}
+				    value={quantity} 
+				    style={{'width': '4.5rem', 'border': 'none', 'padding': '0', 'margin': 'auto', 'text-align': 'center'}}
+				/>
 				<ButtonPlus
 					onClick={onClickPlusBtn}
 					className={size === "md" ? "button-plus-md" : "button-plus-sm"}
 				/>
 			</div>
+			
+			{ stockOverflow ? (
+                <>
+                    <br />
+                    * max. {maxlimit}
+                </>
+                ) : ("")
+            }
+			
 		</div>
+        
+        
 	);
 }
 

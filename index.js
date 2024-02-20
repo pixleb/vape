@@ -69,9 +69,9 @@ app.get('/get_glicerin_12', function(req, res)
     
     let prod = {products: [], size: 0};
     let categories = [
-        '41e7dc97-2d65-11ee-0a80-0c8f000c18e2',
-        'ab22539f-b5f6-11ee-0a80-05fc0027a1a3',
-        '2ce4d356-b209-11ee-0a80-032d001d7154'
+        'ab22539f-b5f6-11ee-0a80-05fc0027a1a3', // ice editions
+        '2ce4d356-b209-11ee-0a80-032d001d7154', // sweets and desserts
+        'c3f08641-b0c4-11ee-0a80-0ea30001ed85' // fruits and drinks
     ];
     
     axios.get('https://b2b.moysklad.ru/desktop-api/public/kZPpwgM9Powo/products.json?category=&category_id=&limit=1000&offset=0&search=')
