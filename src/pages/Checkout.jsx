@@ -32,8 +32,6 @@ function Checkout({ setActivePage, cart, forceUpdate }) {
 
 	let phoneRef = React.createRef(),
 		nameRef = React.createRef(),
-		maildataRef = React.createRef(),
-		inndataRef = React.createRef(),
 		commentRef = React.createRef();
 
     const onPhoneFocus = e => {
@@ -49,8 +47,6 @@ function Checkout({ setActivePage, cart, forceUpdate }) {
 	const makeOrder = () => {
 		let phone = phoneRef.current.value;
 		let name = nameRef.current.value;
-        let maildata = maildataRef.current.value;
-        let inndata = inndataRef.current.value;
 		let comment = commentRef.current.value;
 
         // тут конечно лучше более серьезную валидацию на regexp сделать, но об этом не просили
@@ -63,8 +59,6 @@ function Checkout({ setActivePage, cart, forceUpdate }) {
 			products: products,
 			phone: phone,
 			name: name,
-            maildata: maildata,
-            inndata: inndata,
 			comment: comment,
 		});
 
@@ -106,26 +100,6 @@ function Checkout({ setActivePage, cart, forceUpdate }) {
 							className="checkout__input _tel"
 							onFocus = {onPhoneFocus}
 							onKeyDown = {onPhoneChange}
-							required
-						/>
-					</label>
-					<label className="checkout__label">
-						Дані отримувача на Новій пошті
-						<input
-							ref={maildataRef}
-							type="tel" 
-							placeholder="Телефон, П.І.Б., місто, відділення НП"
-							className="checkout__input"
-							required
-						/>
-					</label>
-					<label className="checkout__label">
-						Назва ФОП та ЄДРПОУ(ІПН) для рахунку
-						<input
-							ref={inndataRef}
-							type="tel" 
-							placeholder="Назва ФОП та ЄДРПОУ(ІПН) для рахунку"
-							className="checkout__input"
 							required
 						/>
 					</label>
