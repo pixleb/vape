@@ -1,0 +1,25 @@
+.aroma {
+    &__container {
+        display: flex;
+        gap: 2rem;
+        
+        @media (orientation: portrait)
+        {
+            display: block;
+        }
+    }
+    
+    &__title {
+        padding-right: 4rem;
+        color: #111827;
+
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 26px;
+        text-transform: uppercase;
+
+        @media (max-width: $md2) {
+            font-size: 16px;
+        }
+    }
+}

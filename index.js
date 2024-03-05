@@ -121,6 +121,9 @@ app.get('/get_nicobooster', function(req, res)
 }
 );
 
+/* misc function */ 
+sortGlycerine = (a, b) => Number(b.code) - Number(a.code);
+
 app.get('/get_glycerine', function(req, res)
 {
     //console.log('got glycerine request');
@@ -129,16 +132,32 @@ app.get('/get_glycerine', function(req, res)
     .then(
         resp => 
         {
-            //console.log('glycerine response: {\n', prod.products[0], '\n...');
+            //console.log('glycerine response:', resp.data.products);
+            resp.data.products.sort(sortGlycerine);
             return res.json(resp.data);
         }
     )
 }
 );
 
+
+/* misc function */ 
+sortByCode = (a, b) => {
+    let glycerineCodes = ['20070', '20071', '20072'];
+    if (glycerineCodes.includes(a.code) && glycerineCodes.includes(b.code))
+        return sortGlycerine(a, b);
+    return Number(a.code) - Number(b.code);
+}
+
 app.post('/order', function(req, res)
 {
     let prod = req.body;
+    
+    prod.products.sort(sortByCode);
+    
+//    console.log(prod);
+//    return;
+    
     try
     {
         axios.post('https://b2b.moysklad.ru/desktop-api/public/kZPpwgM9Powo/create-order', prod)

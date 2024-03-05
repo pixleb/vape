@@ -15,12 +15,12 @@ class Cart
         this.stored = new Object();
     }
     
-    add(item)
+    add(item, addedQuantity = 1)
     {
         let itemCode = item.code;
         if (Object.keys(this.stored).includes(itemCode))
-            this.stored[`${itemCode}`].quantity++;
-        else this.stored[`${itemCode}`] = {...item, quantity: 1};
+            this.stored[`${itemCode}`].quantity += addedQuantity;
+        else this.stored[`${itemCode}`] = {...item, quantity: addedQuantity};
     }
     set(item, quantity)
     {
@@ -28,11 +28,11 @@ class Cart
         quantity? (this.stored[`${itemCode}`].quantity = quantity) : (delete this.stored[`${itemCode}`]);
     }
     
-    rem(item)
+    rem(item, removedQuantity = 1)
     {
         let itemCode = item.code, itemInCart = this.stored[`${itemCode}`];
-        if (itemInCart.quantity - 1)
-            itemInCart.quantity--;
+        if (itemInCart.quantity - removedQuantity)
+            itemInCart.quantity -= removedQuantity;
         else delete this.stored[`${itemCode}`];
     }
     

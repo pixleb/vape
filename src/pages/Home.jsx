@@ -66,7 +66,7 @@ function Home({ catalogItems, activePage, setActivePage, forceUpdate, cart }) {
 						<div className="nav__wrapper">
 							<ul className="nav__content">
 								<li className="nav__item _main" onClick = { () => setActivePage('catalog') }
-								    style = {{'cursor': 'pointer'}}>Выбор товаров</li>
+								    style = {{'cursor': 'pointer'}}>Вибір товарів</li>
 								<li className="nav__item">Кошик</li>
 							</ul>
 							<div className="all-goods">
@@ -80,7 +80,7 @@ function Home({ catalogItems, activePage, setActivePage, forceUpdate, cart }) {
 					{activePage === "checkout" ? (
 						<ul className="nav__content">
 							<li className="nav__item _main" onClick = { () => setActivePage('catalog') }
-							    style = {{'cursor': 'pointer'}}>Выбор товаров</li>
+							    style = {{'cursor': 'pointer'}}>Вибір товарів</li>
 							<li className="nav__item" onClick = { () => setActivePage('cart') }
 							    style = {{'cursor': 'pointer'}}>Кошик</li>
 							<li className="nav__item">Оформлення замовлення</li>

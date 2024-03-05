@@ -80,7 +80,7 @@ function Catalog({ items, setActivePage, activePage, className }) {
 				            onClick={() => setActivePage("catalog")}
 				        >
 				            <a href="#" className="catalog__link">
-				                Все товары
+				                Всі товари
 				            </a>
 				        </li>
 						{items.map((item, index) => {
