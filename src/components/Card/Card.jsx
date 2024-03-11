@@ -15,9 +15,11 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item,
 	const [quantityCounter, setQuantityCounter] = useState(quantity);
 
 	const handleIncrement = () => {
-		addItem(false);
         if (quantityCounter < item.stock)
+		{
+			addItem(false);
             setQuantityCounter(quantityCounter + 1);
+		}
 	};
 
 	const handleDecrement = () => {
@@ -47,7 +49,7 @@ function Card({ className = "", newTaste, title, subtitle, price, cardSrc, item,
 			// if this is the first click - show counter
 			setIsFirst(false);
 			setQuantityCounter(1);
-		} else {
+		} else if (cart.stored) {
 			// smth else
 		}
         // explicit
